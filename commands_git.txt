@@ -1,0 +1,90 @@
+git log   #Muestra el historial de los commits
+
+git log --stat    #Muestra el historial de commits y ademas especifica en cada commit, que archivo fue modificado
+
+git diff    #Compara 2 archivos/commits
+
+git clone   #Crea un clon del repositorio
+
+git config --global color.ui auto
+
+Associating text editors with Git https://help.github.com/articles/associating-text-editors-with-git/
+
+git config --global core.editor "atom --wait"
+
+git config --global push.default upstream
+
+git config --global merge.conflictstyle diff3
+
+git init    #Inicializar un repo crea el folder .git
+
+git status    #Muestra cuales archivos tiene cambios
+
+git add   #Agrega archivos al stage area
+
+git commit -m "Commit message" #
+
+git diff    #Sin argumentos compara los archivos del 'Working directory' y 'Staging area'
+
+git diff --staged   #Compara los archivos del 'Staging area' y 'Repository'
+
+git branch    #Muestra la rama actual, si inlcluyes un argumento crea una rama con el nombre del argumento
+
+git log --graph --oneline master coins    #Muestra los commits de los branches
+
+git merge master coins    #Combina la rama coins a la master
+
+git branch -d coins   #Borra los commits de la etiqueta 'coins', pero seguiran en la rama
+
+git log --graph   #Dibuja el diagrama de commits
+
+Caching your GitHub password in Git https://help.github.com/articles/caching-your-github-password-in-git/#platform-all
+
+git remote    #Muestra las conexiones remotas
+
+git remote add origin URL   #Agrega tu repo remoto de GitHub
+
+git push origin master    #Sube la branch master a origin que es el remoto de GitHub
+
+Using SSH https://help.github.com/articles/generating-an-ssh-key/
+
+git pull origin master    #Baja los cambios del origin al branch master
+
+git fetch origin    #Baja los cambios a origin/master
+
+git merge master origin/master    #Combina lo de origin/master con master
+
+********************************************************************************
+
+Merge conflict
+
+If you get a message like this
+
+Auto-merging game.js
+CONFLICT (content): Merge conflict in game.js
+Automatic merge failed; fix conflicts and then commit the result.
+
+then your files were not in the same state as Caroline's when you started the merge. To fix this, complete the following steps:
+
+    1. Restore your files to their state before you started the merge by running git merge --abort
+    2. Double check the state of your files. If you run git log while the master branch is checked out, you should see Caroline's "Add color" commit as the second-most-recent, and the most recent should be your commit fixing the bullet bug. If you use git diff to compare your commit to Caroline's, your commit should introduce the line this.delayBeforeBullet = 10; on line 424. The line should be indented to the same level as the line below it using only spaces (no tabs), and the line should have no spaces after it.
+    3. Once your file is in the correct state, create a new commit with your changes.
+    4. Try the merge again.
+
+********************************************************************************
+
+Merge conflict (Newline characters between Windows and Unix systems)
+
+Context: Whenever we hit the "Enter" key on the keyboard, we are actually telling the computer to insert an invisible character into our text file to indicate to the computer that there should be a new line. Unix systems adds one character called the "line feed" character or LF or \n while Windows systems adds two characters, "carriage return" and "line feed" or CRLF or \r\n.
+
+Caroline's files have LF because her files were edited on Mac OSX, which uses LF. If a Windows user were to edit Caroline's files, the Windows text editor might convert all LF to CRLF to make editing files possible. When the Windows user merges her file with Caroline's files, a merge conflict will result due to the different LF and CRLF characters.
+
+To fix this, Windows users should set the global autocrlf attribute to true: git config --global core.autocrlf true. More information can be found here: https://help.github.com/articles/dealing-with-line-endings/#platform-all
+
+********************************************************************************
+
+Comparing a commit to its parent
+
+The command Caroline mentions to compare a commit to its parent is git show commit_id
+
+********************************************************************************
